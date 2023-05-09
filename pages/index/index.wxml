@@ -1,0 +1,15 @@
+<!--pages/index/index.wxml-->
+<view>
+    <!-- 轮播图 -->
+    <swiper class="indexContainer" indicator-dots="ture">
+        <swiper-item class="banners">
+            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode=""/>
+        </swiper-item>
+        <swiper-item class="banners">
+            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode=""/>
+        </swiper-item>
+        <swiper-item class="banners">
+            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode=""/>
+        </swiper-item>
+    </swiper>
+</view>
