@@ -1,15 +1,9 @@
 <!--pages/index/index.wxml-->
 <view>
     <!-- 轮播图 -->
-    <swiper class="indexContainer" indicator-dots="ture">
-        <swiper-item class="banners">
-            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode="" />
-        </swiper-item>
-        <swiper-item class="banners">
-            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode="" />
-        </swiper-item>
-        <swiper-item class="banners">
-            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode="" />
+    <swiper class="indexContainer" indicator-dots="ture" autoplay circular>
+        <swiper-item class="banners" wx:for="{{bannerList}}" wx:key="bannerId">
+            <image src="{{item.pic}}" />
         </swiper-item>
     </swiper>
     <!-- 图标导航区域 -->
@@ -35,10 +29,10 @@
             <text>直播</text>
         </view>
     </view>
-    <!-- 推荐歌曲头部 --> 
+    <!-- 推荐歌曲头部 -->
     <view class="recommenContainer">
         <view class="header">
-        <text class="title">推荐歌曲</text>
+            <text class="title">推荐歌曲</text>
             <view>
                 <text>为你精心推荐</text>
                 <text class="more">查看更多</text>
@@ -47,29 +41,9 @@
     </view>
     <!-- 推荐歌曲的内容 -->
     <scroll-view class="recommenScroll" enable-flex="true" scroll-x="true">
-        <view class="scrollItem">
-            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode=""/>
-            <text>快跑快跑快跑快跑快跑快跑快跑快跑快跑快跑快跑快跑</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode=""/>
-            <text>快跑</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode=""/>
-            <text>快跑</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode=""/>
-            <text>快跑</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode=""/>
-            <text>快跑</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode=""/>
-            <text>快跑</text>
+        <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id">
+            <image src="{{item.picUrl}}"/>
+            <text>{{item.name}}</text>
         </view>
     </scroll-view>
 </view>

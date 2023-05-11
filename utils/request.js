@@ -8,11 +8,11 @@ export default (url, data = {}, method = 'GET') => {
             data,
             method,
             success: (res) => {
-                // console.log('成功', res);
+                console.log('成功', res);
                 resolve(res.data)
             },
             fail: (err) => {
-                // console.log('失败', err);
+                console.log('失败', err);
                 reject(err)
             }
         })

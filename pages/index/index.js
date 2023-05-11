@@ -6,17 +6,27 @@ Page({
      * 页面的初始数据
      */
     data: {
-        bannerList:[]
+        //轮播图数据
+        bannerList: [],
+        //推荐歌单数据
+        recommendList: []
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad:async function (options) {
+    onLoad: async function (options) {
         //请求轮播图
-        let bannerListData =  await request('/banner',{type:2})
+        let bannerListData = await request('/banner', {
+            type: 2
+        })
         this.setData({
-            bannerList:bannerListData
+            bannerList: bannerListData.banners
+        })
+        //请求推荐歌单数据
+        let recommendListData = await request('/personalized', {limit: 10})
+        this.setData({
+            recommendList: recommendListData.result
         })
     },
 
