@@ -30,20 +30,31 @@
         </view>
     </view>
     <!-- 推荐歌曲头部 -->
-    <view class="recommenContainer">
-        <view class="header">
-            <text class="title">推荐歌曲</text>
-            <view>
-                <text>为你精心推荐</text>
-                <text class="more">查看更多</text>
-            </view>
-        </view>
-    </view>
+    <NavHeader title='推荐歌曲' nav="猜你喜欢"></NavHeader>
     <!-- 推荐歌曲的内容 -->
     <scroll-view class="recommenScroll" enable-flex="true" scroll-x="true">
         <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id">
-            <image src="{{item.picUrl}}"/>
+            <image src="{{item.picUrl}}" />
             <text>{{item.name}}</text>
         </view>
     </scroll-view>
+
+    <!-- 排行榜 -->
+    <view>
+        <!-- 排行榜区域头部 -->
+        <NavHeader title='排行榜' nav="热歌风向标"></NavHeader>
+        <!-- 排行榜的内容 -->
+        <swiper class="topListSwiper" next-margin="50rpx">
+            <swiper-item class="swiperItem" wx:for="{{topList}}" wx:key="name">
+                <view class="title">{{item.name}}</view>
+                <view class="musicItem" wx:for="{{item.tracks}}" wx:key="first" wx:for-item="musics">
+                    <image src="/static/images/截屏2021-09-13 下午3.37.22.png" mode="" />
+                    <view class="count">{{index+1}}</view>
+                    <text class="nusicName">{{musics.first}}</text>
+                    <text class="musicSinger" decode="{{true}}">-&nbsp;{{musics.second}}</text>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+
 </view>

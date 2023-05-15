@@ -1,0 +1,21 @@
+.recommenContainer {
+    padding: 10rpx 20rpx;
+}
+
+.recommenContainer .header .title {
+    font-size: 28rpx;
+    line-height: 80rpx;
+    color: #575555;
+}
+
+
+.recommenContainer .header .more {
+    height: 20rpx;
+    float: right;
+    border: 1rpx solid #333;
+    padding: 10rpx 20rpx;
+    font-size: 24rpx;
+    text-align: center;
+    line-height: 20rpx;
+    border-radius: 30rpx;
+}

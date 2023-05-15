@@ -9,7 +9,9 @@ Page({
         //轮播图数据
         bannerList: [],
         //推荐歌单数据
-        recommendList: []
+        recommendList: [],
+        //排行榜数据
+        topList: []
     },
 
     /**
@@ -24,9 +26,27 @@ Page({
             bannerList: bannerListData.banners
         })
         //请求推荐歌单数据
-        let recommendListData = await request('/personalized', {limit: 10})
+        let recommendListData = await request('/personalized', {
+            limit: 10
+        })
         this.setData({
             recommendList: recommendListData.result
+        })
+        //请求排行榜数据(并对请求到的数据进行处理)
+        let index = 0
+        let resultArr = []
+        let topListData = await request('/toplist/detail')
+        while (index < 4) {
+            let topListItem = {
+                name: topListData.list[index].name,
+                imgUrl: topListData.list[index].coverImgUrl,
+                tracks: topListData.list[index].tracks.slice(0, 3)
+            }
+            resultArr.push(topListItem)
+            index++
+        }
+        this.setData({
+            topList: resultArr
         })
     },
 
