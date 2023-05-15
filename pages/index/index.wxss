@@ -111,6 +111,7 @@
 }
 
 .musicItem image {
+    /* display: block; */
     width: 100rpx;
     height: 100rpx;
     margin-right: 10rpx;
@@ -119,13 +120,20 @@
 
 .musicItem .nusicName {
     display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 24rpx;
 }
 
 .musicItem .musicSinger {
     display: block;
-    font-size: 28rpx;
+    font-size: 22rpx;
     padding-left: 10rpx;
     color: #575555;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .musicItem .count {
