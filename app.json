@@ -15,8 +15,7 @@
     "tabBar": {
         "color": "#8a8a8a",
         "selectedColor": "#2c2c2c",
-        "list": [
-            {
+        "list": [{
                 "pagePath": "pages/index/index",
                 "text": "主页",
                 "iconPath": "/static/images/tab/shouye-2.png",
