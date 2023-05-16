@@ -13,16 +13,23 @@ Page({
      */
     data: {
         coverTransform:'translateY(0)',
-        coverTransition:''
+        coverTransition:'',
+        userInfo:{}
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        let userInfo = wx.getStorageSync('userInfo')
+        if(userInfo) {
+            this.setData({
+                userInfo:JSON.parse(userInfo)
+            })
+        }
     },
 
+    //处理页面的滑动
     handleTouchStart(event){
         this.setData({
             coverTransition:''
@@ -46,6 +53,13 @@ Page({
         this.setData({
             coverTransform:`translateY(0rpx)`,
             coverTransition:'transform 1s linear'
+        })
+    },
+
+    //跳转到登录页面
+    toLogin(){
+        wx.navigateTo({
+          url: '/pages/login/login',
         })
     },
 

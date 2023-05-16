@@ -8,14 +8,82 @@ Page({
     data: {
         phone: '',
         password: '',
-        isSend: false
+        isSend: true,
+        key: '',
+        qrurl: '',
+        qrimg: '',
+        //定时器
+        setTime: null,
+
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: async function (options) {
+        // 发送请求获取key
+        let {
+            key
+        } = this.data
+        let keyData = await request('/login/qr/key', {
+            timestamp: new Date().getTime()
+        })
+        this.setData({
+            key: keyData.data.unikey
+        })
+        //发送请求获取qrimg
+        let qrData = await request('/login/qr/create', {
+            key: keyData.data.unikey,
+            qrimg: true,
+            timestamp: new Date().getTime()
+        })
+        this.setData({
+            qrurl: qrData.data.qrurl,
+            qrimg: qrData.data.qrimg
+        })
 
+        //启动定时器
+        this.startCount()
+    },
+
+    //定时器
+    startCount: async function () {
+        if (!this.data.setTime) {
+            this.data.setTime = setInterval(async () => {
+                let {
+                    key
+                } = this.data
+                let result = await request('/login/qr/check', {
+                    key,
+                    timestamp: new Date().getTime()
+                })
+                if (result.code == 803) {
+                    
+                    wx.showToast({
+                        title: '登录成功',
+                    })
+                    this.getuserInfo()
+                    clearInterval(this.data.setTime)
+                    this.setData({
+                        setTime: null
+                    })
+                }
+                if (result.code == 800) {
+                    wx.showToast({
+                        title: '二维码过期',
+                    })
+                }
+            }, 1000)
+        }
+    },
+
+    //登录成功后获取用户信息
+    async getuserInfo() {
+        let result = await request('/user/account')
+        wx.setStorageSync('userInfo', JSON.stringify(result.data.profile))
+        wx.reLaunch({
+            url: '/pages/personal/personal',
+        })
     },
 
     //表单回调
@@ -58,15 +126,23 @@ Page({
             return
         }
         //后端验证（还未完成）
-        let result = await request('/captcha/verify',{phone,captcha:password})
-        if(result.code === 503) {
+        let result = await request('/login/cellphone', {
+            phone,
+            captcha: password
+        })
+        if (result.code === 503) {
             wx.showToast({
-              title: '验证码错误',
+                title: '验证码错误',
             })
         }
-        if(result.code === 200) {
+        if (result.code === 200) {
             wx.showToast({
-              title: '登录成功',
+                title: '登录成功',
+            })
+            // 将用户信息存储到本地
+            wx.setStorageSync('userInfo', JSON.stringify(result.profile))
+            wx.reLaunch({
+                url: '/pages/personal/personal',
             })
         }
 
@@ -131,7 +207,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        clearInterval(this.data.setTime)
     },
 
     /**

@@ -4,6 +4,7 @@
         <view class="welcome">
             欢迎回来！
         </view>
+
         <view class="input-content">
             <view class="input-item">
                 <text class="tit">手机号码</text>
@@ -21,6 +22,12 @@
         <view class="forget-section">
             忘记密码?
         </view>
+    </view>
+    <view class="codeWrapper">
+        <view class="showCode">
+            目前不能用手机号登录，请扫码登录
+        </view>
+        <image src="{{qrimg}}"/>
     </view>
     <view class="register-section">
         还没有账号?

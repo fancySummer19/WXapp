@@ -93,3 +93,19 @@
   margin-left: 10rpx;
 }
 
+/* 二维码登录 */
+.codeWrapper {
+    padding: 0 30rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.showCode {
+    margin-left: 20rpx;
+    font-size: large;
+}
+.codeWrapper image {
+    width: 300rpx;
+    height: 300rpx;
+}
