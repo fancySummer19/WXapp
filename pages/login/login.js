@@ -64,6 +64,11 @@ Page({
               title: '验证码错误',
             })
         }
+        if(result.code === 200) {
+            wx.showToast({
+              title: '登录成功',
+            })
+        }
 
     },
     //   发送验证码的回调
