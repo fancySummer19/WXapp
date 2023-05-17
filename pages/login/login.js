@@ -58,7 +58,9 @@ Page({
                     timestamp: new Date().getTime()
                 })
                 if (result.code == 803) {
-                    
+                    //获取的cookie存在本地
+                    wx.setStorageSync('cookie', result.cookie)
+
                     wx.showToast({
                         title: '登录成功',
                     })
@@ -79,8 +81,8 @@ Page({
 
     //登录成功后获取用户信息
     async getuserInfo() {
-        let result = await request('/user/account')
-        wx.setStorageSync('userInfo', JSON.stringify(result.data.profile))
+        let result = await request('/user/account',{cookie:wx.getStorageSync('cookie')})
+        wx.setStorageSync('userInfo', JSON.stringify(result.profile))
         wx.reLaunch({
             url: '/pages/personal/personal',
         })

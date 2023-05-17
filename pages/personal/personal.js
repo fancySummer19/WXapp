@@ -5,62 +5,85 @@ let moveY = 0;
 //手指结束的坐标
 let moveDistance = 0;
 
+import request from '../../utils/request'
+
 // pages/personal/personal.js
 Page({
 
     /**
-     * 页面的初始数据
+     * 页面的初始数据 
      */
     data: {
-        coverTransform:'translateY(0)',
-        coverTransition:'',
-        userInfo:{}
+        coverTransform: 'translateY(0)',
+        coverTransition: '',
+        userInfo: {},
+        recentPlayList: [] //用户的播放记录
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
+        //获取存在本地的用户信息
         let userInfo = wx.getStorageSync('userInfo')
-        if(userInfo) {
+        if (userInfo) {
             this.setData({
-                userInfo:JSON.parse(userInfo)
+                userInfo: JSON.parse(userInfo)
             })
         }
+
+        //获取用户播放记录
+        this.getUserRecentPlayList(this.data.userInfo.userId)
+    },
+
+    //获取用户播放记录函数
+    async getUserRecentPlayList(userid) {
+        let result = await request('/user/record',{uid:userid,type:1})
+        this.setData({
+            recentPlayList:result.weekData.splice(0,10)
+        })
     },
 
     //处理页面的滑动
-    handleTouchStart(event){
+    handleTouchStart(event) {
         this.setData({
-            coverTransition:''
+            coverTransition: ''
         })
         startY = event.touches[0].clientY
     },
-    handleTouchMove(event){
-        moveY  = event.touches[0].clientY
+    handleTouchMove(event) {
+        moveY = event.touches[0].clientY
         moveDistance = moveY - startY
-        if(moveDistance<=0) {
+        if (moveDistance <= 0) {
             moveDistance = 0
         }
-        if(moveDistance >= 80){
-            moveDistance=80
+        if (moveDistance >= 80) {
+            moveDistance = 80
         }
         this.setData({
-            coverTransform:`translateY(${moveDistance}rpx)`
+            coverTransform: `translateY(${moveDistance}rpx)`
         })
     },
-    handleTouchEnd(){
+    handleTouchEnd() {
         this.setData({
-            coverTransform:`translateY(0rpx)`,
-            coverTransition:'transform 1s linear'
+            coverTransform: `translateY(0rpx)`,
+            coverTransition: 'transform 1s linear'
         })
     },
 
-    //跳转到登录页面
-    toLogin(){
-        wx.navigateTo({
-          url: '/pages/login/login',
-        })
+
+
+    //跳转到登录页面和退出登录
+    toLogin() {
+        if (!userInfo) {
+            wx.navigateTo({
+                url: '/pages/login/login',
+            })
+        } else {
+            wx.navigateTo({
+                url: '/pages/logout/logout',
+            })
+        }
     },
 
     /**
