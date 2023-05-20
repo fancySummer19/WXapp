@@ -1,0 +1,108 @@
+/* pages/recommendSong/recommendSong.wxss */
+.recommendSongContainer .header {
+    position: relative;
+    width: 100%;
+    height: 700rpx;
+}
+.recommendSongContainer .header image {
+    width: 100%;
+    height: 100%;
+}
+
+.shadowOne {
+    position: absolute;
+    bottom: 0rpx;
+    bottom: 0;
+    width: 100%;
+    height: 470rpx;
+    /* background-color: aqua; */
+    /* 渐变透明遮罩 */
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 255, 255, 0)), to(#fff));
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0), #fff);
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 0), #fff);
+    background: linear-gradient(top, rgba(255, 255, 255, 0), #fff);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00ffffff, endColorstr=#ffffff, GradientType=0);
+}
+
+.date {
+    position: absolute;
+    bottom: 30rpx;
+    left: 30rpx;
+    /* border: 1rpx #00ffffff solid; */
+    width: 200rpx;
+    height: 100rpx;
+}  
+.day {
+    font-size: 100rpx;
+}
+.month {
+    font-size:50rpx;
+}
+
+/* 列表 */
+.listContainer {
+    /* position: relative; */
+    /* top: -20px; */
+    padding: 0 30rpx;
+    border-radius:30rpx;
+}
+
+.listHeader {
+    top: 0;
+    position: sticky;
+	z-index: 100;
+    height: 80rpx;
+    line-height: 80rpx;
+    background-color: #fff;
+    /* border-radius: 0 0 10rpx 10rpx; */
+    /* border: 5rpx solid rgb(114, 27, 27); */
+}
+.listHeader .changeMore {
+    float: right;
+}
+
+/* 列表内容 */
+.scrollItem {
+    display: flex;
+    position:relative;
+    margin-bottom: 20rpx;
+}
+.scrollItem image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 10rpx;
+}
+
+.musicInfo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20rpx;
+    max-width: 400rpx;
+}
+.musicInfo .musicName {
+    /* margin-top: 5rpx; */
+    height: 50rpx;
+    line-height: 50rpx;
+    font-size: 33rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.musicInfo .author {
+    /* margin-top: 4rpx; */
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 23rpx;
+    color: rgb(145, 145, 145);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.scrollItem .iconfont {
+    position: absolute; 
+    right: 0;
+    width: 100rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: right;
+}

@@ -58,7 +58,7 @@
                     <view class="recentItem" wx:for="{{recentPlayList}}" wx:key="song.al.id">
                         <image src="{{item.song.al.picUrl}}" mode=""/>
                     </view>
-                    <view >
+                    <view wx:if="{{!recentPlayList.length}}">
                         暂无播放记录
                     </view>
                 </scroll-view>

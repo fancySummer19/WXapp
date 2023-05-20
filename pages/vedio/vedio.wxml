@@ -1,2 +1,5 @@
-<!--pages/vedio/vedio.wxml-->
-<text>pages/vedio/vedio.wxml</text>
+<view class="videoContainer">
+    <view class="header">
+        还未开发...
+    </view>
+</view>

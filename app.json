@@ -1,9 +1,10 @@
 {
     "pages": [
+        "pages/recommendSong/recommendSong",
         "pages/personal/personal",
+        "pages/vedio/vedio",
         "pages/login/login",
         "pages/index/index",
-        "pages/vedio/vedio",
         "pages/logout/logout"
     ],
     "sitemapLocation": "sitemap.json",
