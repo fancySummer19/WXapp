@@ -5,7 +5,8 @@
         "pages/vedio/vedio",
         "pages/login/login",
         "pages/index/index",
-        "pages/logout/logout"
+        "pages/logout/logout",
+        "pages/songDetail/songDetail"
     ],
     "sitemapLocation": "sitemap.json",
     "window": {
