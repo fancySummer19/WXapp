@@ -36,6 +36,13 @@ Page({
         //请求每日歌曲的数据
         this.getRecommendSongs(wx.getStorageSync('cookie'))
     },
+    //跳转到歌曲详情页
+    toSongDetail(event){
+        let song = event.currentTarget.dataset.song
+        wx.navigateTo({
+          url: '/pages/songDetail/songDetail?musicId='+song.id,
+        })
+    },
 
     //获取每日推荐歌曲信息
     async getRecommendSongs(cookie){

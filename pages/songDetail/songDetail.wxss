@@ -1,1 +1,118 @@
-/* pages/songDetail/songDetail.wxss */
+/* 播放器的图标 */
+.songDetailContainer {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-image: '{{song.al.picUrl}}'; */
+    /* background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat; */
+    /* filter: blur(10px); */
+}
+.bgImg {
+    width: 100%;
+    height: 100%;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    z-index: -4;
+    filter: blur(70px);
+}
+
+
+/* 摇杆 */
+.needle {
+    z-index: 99;
+    position: absolute;
+    top: 130rpx;
+    left: 340rpx;
+    width: 192rpx;
+    height: 274rpx;
+    transform-origin: 40rpx 0;
+    transform: rotate(-25deg) ;
+    transition: transform 0.8s;
+}
+.needleRotate {
+    transform: rotate(0) ;
+}
+/* 自制摇杆的底座 */
+.circle {
+    position: relative;
+    z-index: 100;
+    width: 65rpx;
+    height: 65rpx;
+    border-radius: 50%;
+    background: #dddcdc;
+}
+/* 磁盘 */
+.discContainer {
+    position: absolute;
+    top: 265rpx;
+    width: 598rpx;
+    height: 598rpx;
+}
+/* 磁盘转动的动画 */
+.discAnimation {
+    animation: disc 25s linear infinite;
+    /* animation-delay: 0.5s; */
+}
+@keyframes disc {
+    from {}
+    to {
+        transform:  rotate(360deg);
+    }
+}
+.pause {
+    animation-play-state: paused;
+    -webkit-animation-play-state: paused;
+}
+
+.disc {
+    width: 598rpx;
+    height: 598rpx;
+}
+.musicImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin:auto;
+    width: 370rpx;
+    height: 370rpx;
+    border-radius: 50%;
+}
+
+/* 底部控制区域 */
+.musicControl {
+    position: absolute;
+    bottom: 40rpx;
+    left: 0;
+    width: 100%;
+    display: flex;
+}
+.musicControl text {
+    width: 20%;
+    height: 120rpx;
+    line-height: 120rpx;
+    text-align: center;
+    font-size: 65rpx;
+}
+.musicControl text.big {
+    font-size: 90rpx;
+}
+
+/* 歌曲信息 */
+.musicName {
+    position: absolute;
+    top: 10rpx;
+    font-size: 35rpx;
+}
+.musicAuthor {
+    position: absolute;
+    top: 60rpx;
+    font-size: 26rpx;
+    color: rgb(36, 35, 35);
+}

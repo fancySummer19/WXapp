@@ -1,18 +1,44 @@
 // pages/songDetail/songDetail.js
+import request from '../../utils/request'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        // 音乐是否播放
+        isPlay:false,
+        song:{},
+        //背景图片
+        background:{
+            backgroundImage:''
+        }
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        let musicId = options.musicId
+        this.getMusicInfo(musicId)
+        // this.setData({
+        //     backgroundImage:
+        // })
+    },
+    //获取音乐详情的方法
+    async getMusicInfo(musicId) {
+        let songData = await request('/song/detail',{ids:musicId})
+        this.setData({
+            song:songData.songs[0],
+            background:{backgroundImage:songData.songs[0].al.picUrl}
+        })
+    },
+    //音乐暂停与播放的回调
+    handleMusicPlay(){
+        let isPlay = !this.data.isPlay
+        this.setData({
+            isPlay
+        })
     },
 
     /**

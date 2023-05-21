@@ -17,7 +17,7 @@
             <text class="changeMore">多选</text>
         </view>
         <!-- 内容 -->
-        <scroll-view scroll-y class="listScroll" wx:for="{{recommendSongs}}" wx:key="id"> 
+        <scroll-view scroll-y class="listScroll" wx:for="{{recommendSongs}}" wx:key="id" bindtap="toSongDetail" data-song="{{item}}"> 
             <view class="scrollItem">
                 <image src="{{item.al.picUrl}}" />
                 <view class="musicInfo">
