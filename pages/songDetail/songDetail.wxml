@@ -13,9 +13,11 @@
 
     <!-- 进度条 -->
     <view class="progressControl">
-        <text>00:00</text>
-        <view class="barControl"></view>
-        <text>3:00</text>
+        <text>{{currentTime}}</text>
+        <!-- <view class="barControl"></view> -->
+        <van-slider value="{{percentValue}}" bind:change="onChange" class="slider" step="1" use-button-slot bar-height="10rpx" active-color="#000000">
+            <view class="custom-button" slot="button"></view></van-slider>
+        <text>{{durationTime}}</text>
     </view>
 
     <!-- 底部按钮栏 -->

@@ -1,3 +1,6 @@
 {
-    "usingComponents": {}
+    "usingComponents": {
+        "van-slider": "@vant/weapp/slider/index",
+        "van-button": "@vant/weapp/button/index"
+      }
 }

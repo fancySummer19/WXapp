@@ -29,8 +29,8 @@
     position: absolute;
     top: 130rpx;
     left: 340rpx;
-    width: 192rpx;
-    height: 274rpx;
+    width: 220rpx;
+    height: 300rpx;
     transform-origin: 40rpx 0;
     transform: rotate(-25deg) ;
     transition: transform 0.8s;
@@ -50,7 +50,7 @@
 /* 磁盘 */
 .discContainer {
     position: absolute;
-    top: 265rpx;
+    top: 270rpx;
     width: 598rpx;
     height: 598rpx;
 }
@@ -89,7 +89,7 @@
 /* 底部控制区域 */
 .musicControl {
     position: absolute;
-    bottom: 40rpx;
+    bottom: 80rpx;
     left: 0;
     width: 100%;
     display: flex;
@@ -110,10 +110,44 @@
     position: absolute;
     top: 10rpx;
     font-size: 33rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .musicAuthor {
     position: absolute;
     top: 60rpx;
     font-size: 28rpx;
     color: rgb(36, 35, 35);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 进度条 */
+.progressControl {
+    position: absolute;
+    bottom: 220rpx;
+    width: 700rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    display: flex;
+}
+.progressControl .slider {
+    width: 500rpx;
+    height: 4rpx;
+    margin: auto;
+}
+.progressControl text {
+    display: block;
+    margin-top: 5rpx;
+}
+/* .progressControl text {
+    margin:0rpx 30rpx;
+} */
+.custom-button {
+    width: 20rpx;
+    height: 20rpx;
+    border-radius: 50%;
+    background-color: #000000;
 }
