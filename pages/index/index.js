@@ -49,6 +49,27 @@ Page({
             topList: resultArr
         })
     },
+    //处理轮播图的跳转
+    handleBanner(event){
+        let banner = event.currentTarget.dataset.banner
+        console.log(event.currentTarget.dataset);
+        console.log(banner);
+        if(banner.targetType==1) {
+            wx.navigateTo({
+                url: '/pages/songDetail/songDetail?musicId=' + banner.song.id,
+            })
+        }
+        if(banner.targetType==10) {
+            wx.navigateTo({
+                url: '/pages/recommendSong/recommendSong?id='+banner.targetId,
+              })
+        }else {
+            wx.showToast({
+              title: '不能跳转',
+              icon:'error'
+            })
+        }
+    },
     //从推荐歌单跳转到歌单详情
     hanleRecommendDetails(event){
         let list = event.currentTarget.dataset.list

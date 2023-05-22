@@ -1,5 +1,6 @@
 // pages/recommendSong/recommendSong.js
 import request from '../../utils/request'
+import PubSub from 'pubsub-js'
 Page({
 
     /**
@@ -9,7 +10,10 @@ Page({
         recommendSongs: [],
         day: '',
         month: '',
-        // list:[]
+        // list:[],
+        listId: '',
+        listInfo: [],
+        index: 0
     },
 
     /**
@@ -17,9 +21,12 @@ Page({
      */
     onLoad(options) {
         if (options.id) {
+            this.setData({
+                listId: options.id
+            })
             //获取跳转过来时携带的歌单ID
-            let ListId = options.id
-            this.getListDetails(ListId)
+            this.getListDetails(options.id)
+            this.getLsitInfo(options.id)
         } else {
             // console.log(ListId);
             //判断用户是否登录
@@ -43,8 +50,36 @@ Page({
             //请求每日歌曲的数据
             this.getRecommendSongs(wx.getStorageSync('cookie'))
         }
+        //订阅来自songDetail的消息用于切换歌曲
+        PubSub.subscribe('switchType', (msg, type) => {
+            let {
+                recommendSongs,
+                index
+            } = this.data
+            if (type === 'pre') {
+                (index === 0) && (index = recommendSongs.length)
+                index -= 1
+            } else {
+                (index === recommendSongs.length-1) && (index = -1)
+                index += 1
+            }
+            this.setData({
+                index
+            })
+            let musicId = recommendSongs[index].id
+            PubSub.publish('musicId',musicId)
+        })
     },
-    //获取歌单的详细内容
+    //获取歌单的信息
+    async getLsitInfo(listId) {
+        let res = await request('/playlist/detail', {
+            id: listId
+        })
+        this.setData({
+            listInfo: res.playlist
+        })
+    },
+    //获取歌单的所有歌曲
     async getListDetails(listid) {
         let res = await request('/playlist/track/all', {
             id: listid,
@@ -57,7 +92,13 @@ Page({
     },
     //跳转到歌曲详情页
     toSongDetail(event) {
-        let song = event.currentTarget.dataset.song
+        let {
+            song,
+            index
+        } = event.currentTarget.dataset
+        this.setData({
+            index
+        })
         wx.navigateTo({
             url: '/pages/songDetail/songDetail?musicId=' + song.id,
         })
@@ -98,7 +139,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload() {
-
+        PubSub.unsubscribe('switchType')
     },
 
     /**

@@ -10,7 +10,7 @@
                 <text class="tit">手机号码</text>
                 <input type="text" placeholder="请输入手机号码" bindinput="handleInput" id="phone" />
                 <!-- <button class="codeButton" bindtap="sendCode">获取验证码</button> -->
-                <van-button type="info" bindtap="sendCode"> 获取</van-button>
+                <!-- <van-button type="info" bindtap="sendCode"> 获取</van-button> -->
             </view>
             <view class="input-item">
                 <text class="tit">验证码</text>

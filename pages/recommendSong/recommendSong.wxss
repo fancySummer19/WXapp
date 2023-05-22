@@ -23,7 +23,7 @@
     background: linear-gradient(top, rgba(255, 255, 255, 0), #fff);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00ffffff, endColorstr=#ffffff, GradientType=0);
 }
-
+/* 列表头部 */
 .date {
     position: absolute;
     bottom: 30rpx;
@@ -38,6 +38,21 @@
 .month {
     font-size:50rpx;
 }
+.listInfoContainer {
+    position: absolute;
+    bottom: 30rpx;
+    left: 30rpx;
+    /* border: 1rpx #00ffffff solid; */
+    width: 100%;
+    height: 100rpx;
+}
+.listContainer .listName {
+    font-size: 40rpx;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 /* 列表 */
 .listContainer {
@@ -51,8 +66,8 @@
     top: 0;
     position: sticky;
 	z-index: 100;
-    height: 80rpx;
-    line-height: 80rpx;
+    height: 100rpx;
+    line-height: 100rpx;
     background-color: #fff;
     /* border-radius: 0 0 10rpx 10rpx; */
     /* border: 5rpx solid rgb(114, 27, 27); */
