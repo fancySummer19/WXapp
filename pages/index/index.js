@@ -49,6 +49,19 @@ Page({
             topList: resultArr
         })
     },
+    //从推荐歌单跳转到歌单详情
+    hanleRecommendDetails(event){
+        let list = event.currentTarget.dataset.list
+        wx.navigateTo({
+          url: '/pages/recommendSong/recommendSong?id='+list.id,
+        })
+    },
+    //每日推荐的页面跳转
+    handleMeiri(){
+        wx.navigateTo({
+          url: '/pages/recommendSong/recommendSong',
+        })
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

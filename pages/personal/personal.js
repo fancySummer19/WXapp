@@ -36,6 +36,13 @@ Page({
         this.getUserRecentPlayList(this.data.userInfo.userId)
     },
 
+    //从最近播放跳转到歌曲播放页面
+        toSongDetail(event){
+            let song = event.currentTarget.dataset.songs.song
+            wx.navigateTo({
+              url: '/pages/songDetail/songDetail?musicId='+song.id,
+            })
+        },
     //获取用户播放记录函数
     async getUserRecentPlayList(userid) {
         let result = await request('/user/record',{uid:userid,type:1})

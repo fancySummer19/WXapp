@@ -6,49 +6,70 @@ Page({
      * 页面的初始数据
      */
     data: {
-        recommendSongs:[],
-        day:'',
-        month:''
+        recommendSongs: [],
+        day: '',
+        month: '',
+        // list:[]
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        //判断用户是否登录
-        let userInfo = wx.getStorageSync('userInfo')
-        if(!userInfo){
-            wx.showToast({
-              title: '请先登录',
-              success:()=>{
-                  wx.reLaunch({
-                    url: '/pages/login/login',
-                  })
-              }
+        if (options.id) {
+            //获取跳转过来时携带的歌单ID
+            let ListId = options.id
+            this.getListDetails(ListId)
+        } else {
+            // console.log(ListId);
+            //判断用户是否登录
+            let userInfo = wx.getStorageSync('userInfo')
+            if (!userInfo) {
+                wx.showToast({
+                    title: '请先登录',
+                    success: () => {
+                        wx.reLaunch({
+                            url: '/pages/login/login',
+                        })
+                    }
+                })
+            }
+            //更新日期
+            this.setData({
+                day: new Date().getDate(),
+                month: new Date().getMonth() + 1
             })
-        }
-        //更新日期
-        this.setData({
-            day:new Date().getDate(),
-            month:new Date().getMonth() +1
-        })
 
-        //请求每日歌曲的数据
-        this.getRecommendSongs(wx.getStorageSync('cookie'))
+            //请求每日歌曲的数据
+            this.getRecommendSongs(wx.getStorageSync('cookie'))
+        }
+    },
+    //获取歌单的详细内容
+    async getListDetails(listid) {
+        let res = await request('/playlist/track/all', {
+            id: listid,
+            limit: 20,
+            offset: 1
+        })
+        this.setData({
+            recommendSongs: res.songs
+        })
     },
     //跳转到歌曲详情页
-    toSongDetail(event){
+    toSongDetail(event) {
         let song = event.currentTarget.dataset.song
         wx.navigateTo({
-          url: '/pages/songDetail/songDetail?musicId='+song.id,
+            url: '/pages/songDetail/songDetail?musicId=' + song.id,
         })
     },
 
     //获取每日推荐歌曲信息
-    async getRecommendSongs(cookie){
-        let res = await request('/recommend/songs',{cookie})
+    async getRecommendSongs(cookie) {
+        let res = await request('/recommend/songs', {
+            cookie
+        })
         this.setData({
-            recommendSongs:res.data.dailySongs
+            recommendSongs: res.data.dailySongs
         })
     },
 

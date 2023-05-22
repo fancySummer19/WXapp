@@ -8,7 +8,7 @@
     </swiper>
     <!-- 图标导航区域 -->
     <view class="navContainer">
-        <view class="navItem">
+        <view class="navItem" bindtap="handleMeiri">
             <text class="iconfont icon-icon"></text>
             <text>每日推荐</text>
         </view>
@@ -33,7 +33,7 @@
     <NavHeader title='推荐歌曲' nav="猜你喜欢"></NavHeader>
     <!-- 推荐歌曲的内容 -->
     <scroll-view class="recommenScroll" enable-flex="true" scroll-x="true">
-        <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id">
+        <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id" bindtap="hanleRecommendDetails" data-list="{{item}}">
             <image src="{{item.picUrl}}" />
             <text>{{item.name}}</text>
         </view>

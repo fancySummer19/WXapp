@@ -55,7 +55,7 @@
                 <text class="title">最近播放</text>
                 <!-- 最近播放记录 -->
                 <scroll-view scroll-x="true" class="recentScroll" enable-flex="true" wx:if="{{recentPlayList.length}}">
-                    <view class="recentItem" wx:for="{{recentPlayList}}" wx:key="song.al.id">
+                    <view class="recentItem" wx:for="{{recentPlayList}}" wx:key="song.al.id" bindtap="toSongDetail" data-songs="{{item}}">
                         <image src="{{item.song.al.picUrl}}" mode=""/>
                     </view>
                     <view wx:if="{{!recentPlayList.length}}">
