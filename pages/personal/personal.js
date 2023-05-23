@@ -82,7 +82,8 @@ Page({
 
     //跳转到登录页面和退出登录
     toLogin() {
-        if (!userInfo) {
+        console.log(this.data.userInfo);
+        if (JSON.stringify(this.data.userInfo)=="{}") {
             wx.navigateTo({
                 url: '/pages/login/login',
             })

@@ -60,7 +60,6 @@ Page({
                 if (result.code == 803) {
                     //获取的cookie存在本地
                     wx.setStorageSync('cookie', result.cookie)
-
                     wx.showToast({
                         title: '登录成功',
                     })

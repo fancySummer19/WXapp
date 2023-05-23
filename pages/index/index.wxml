@@ -30,7 +30,8 @@
         </view>
     </view>
     <!-- 推荐歌曲头部 -->
-    <NavHeader title='推荐歌曲' nav="猜你喜欢"></NavHeader>
+    <!-- <NavHeader title='推荐歌曲' nav="猜你喜欢"></NavHeader> -->
+    <view class="tuijian">推荐歌单</view>
     <!-- 推荐歌曲的内容 -->
     <scroll-view class="recommenScroll" enable-flex="true" scroll-x="true">
         <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id" bindtap="hanleRecommendDetails" data-list="{{item}}">

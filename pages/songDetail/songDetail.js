@@ -151,7 +151,7 @@ Page({
         PubSub.publish('switchType', type)
         //订阅musicID
         PubSub.subscribe('musicId', (msg, musicId) => {
-            console.log(musicId);
+            // console.log(musicId);
             this.setData({
                 musicId: musicId
             })

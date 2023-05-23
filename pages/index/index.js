@@ -52,8 +52,8 @@ Page({
     //处理轮播图的跳转
     handleBanner(event){
         let banner = event.currentTarget.dataset.banner
-        console.log(event.currentTarget.dataset);
-        console.log(banner);
+        // console.log(event.currentTarget.dataset);
+        // console.log(banner);
         if(banner.targetType==1) {
             wx.navigateTo({
                 url: '/pages/songDetail/songDetail?musicId=' + banner.song.id,

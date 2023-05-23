@@ -139,6 +139,9 @@
 .musicItem .count {
     margin: 0 20rpx;
 }
+.tuijian {
+    margin: 10rpx 20rpx;
+}
 
 
 
