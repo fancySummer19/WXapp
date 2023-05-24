@@ -11,7 +11,10 @@ Page({
         //推荐歌单数据
         recommendList: [],
         //排行榜数据
-        topList: []
+        topList: [],
+        //精品歌单数据
+        cats:['华语','古风','欧美','流行'],
+        highQualityLists:[]
     },
 
     /**
@@ -48,12 +51,27 @@ Page({
         this.setData({
             topList: resultArr
         })
+        //获取精品歌单
+        this.data.cats.forEach(e=>{
+            this.getHighQuality(e)
+        })
+    },
+    //获取精品歌单
+    async getHighQuality(cat){
+        let res =await request('/top/playlist/highquality',{limit:20,cat})
+        let list = res.playlists.slice(0,3)
+        let list2 ={
+            list,
+            cat
+        }
+        let lists = this.data.highQualityLists.concat(list2)
+        this.setData({
+            highQualityLists:lists
+        })
     },
     //处理轮播图的跳转
     handleBanner(event){
         let banner = event.currentTarget.dataset.banner
-        // console.log(event.currentTarget.dataset);
-        // console.log(banner);
         if(banner.targetType==1) {
             wx.navigateTo({
                 url: '/pages/songDetail/songDetail?musicId=' + banner.song.id,

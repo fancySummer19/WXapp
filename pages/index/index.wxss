@@ -101,7 +101,7 @@
     width: 96%;
     font-size: 30rpx;
     line-height: 80rpx;
-    margin: 20rpx;
+    margin: 10rpx 20rpx;
     /* background-color: #fbfbfb; */
 }
 
@@ -123,24 +123,14 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    font-size: 24rpx;
+    font-size: 30rpx;
 }
 
-.musicItem .musicSinger {
-    display: block;
-    font-size: 22rpx;
-    padding-left: 10rpx;
-    color: #575555;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.musicItem .count {
-    margin: 0 20rpx;
-}
 .tuijian {
     margin: 10rpx 20rpx;
+}
+.topListSwiper .title {
+    font-size: 35rpx;
 }
 
 
