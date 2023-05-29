@@ -1,5 +1,4 @@
-// pages/vedio/vedio.js
-import request from '../../utils/request'
+// pages/searchDetail/searchDetail.js
 Page({
 
     /**
@@ -13,13 +12,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
-    },
-    //确定搜索时出发
-    onSearch(e){
-        wx.navigateTo({
-          url: '/pages/searchDetail/searchDetail?searchWord='+e.detail,
-        })
+        console.log(options.searchWord);
     },
 
     /**

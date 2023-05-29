@@ -1,12 +1,13 @@
 {
     "pages": [
+        "pages/vedio/vedio",
         "pages/index/index",
         "pages/personal/personal",
         "pages/recommendSong/recommendSong",
         "pages/songDetail/songDetail",
         "pages/login/login",
-        "pages/vedio/vedio",
-        "pages/logout/logout"
+        "pages/logout/logout",
+        "pages/searchDetail/searchDetail"
     ],
     "sitemapLocation": "sitemap.json",
     "window": {
@@ -17,7 +18,8 @@
     "tabBar": {
         "color": "#8a8a8a",
         "selectedColor": "#2c2c2c",
-        "list": [{
+        "list": [
+            {
                 "pagePath": "pages/index/index",
                 "text": "主页",
                 "iconPath": "/static/images/tab/shouye-2.png",
@@ -37,5 +39,7 @@
             }
         ]
     },
-    "requiredBackgroundModes": ["audio"]
+    "requiredBackgroundModes": [
+        "audio"
+    ]
 }

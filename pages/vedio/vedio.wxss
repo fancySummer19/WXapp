@@ -1,1 +1,9 @@
 /* pages/vedio/vedio.wxss */
+.header {
+    display: flex;
+    justify-content: center;
+
+}
+.searchBar {
+    width: 100%;
+}
