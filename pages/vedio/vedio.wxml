@@ -1,6 +1,22 @@
 <view class="videoContainer">
+    <!-- 搜索框 -->
     <view class="header">
-        <van-search value="{{ value }}" placeholder="请输入搜索关键词" show-action bind:search="onSearch" bind:cancel="onCancel"
-        class="searchBar"/>
+        <van-search value="{{ value }}" placeholder="请输入搜索关键词" show-action bind:search="onSearch" bind:cancel="onCancel" class="searchBar" />
     </view>
+    <!-- 热搜榜 -->
+    <view class="hotContainer">
+        <swiper class="topListSwiper" next-margin="200rpx" previous-margin='25rpx'>
+            <swiper-item class="swiperItem" wx:for="{{hotListDetail}}" wx:key="index">
+                <view class="title">
+                    <text class="titleContent">{{item.title}}</text>
+                </view>
+                <view class="musicItem" wx:for="{{item.list}}" wx:key="index" wx:for-item="musics">
+                    <text class="count">{{index+1}}.</text>
+                    <text class="nusicName">{{musics.name}}</text>
+                </view>
+            </swiper-item>
+        </swiper>
+
+    </view>
+
 </view>
