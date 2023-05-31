@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        searchWord:''
     },
 
     /**
@@ -13,6 +13,9 @@ Page({
      */
     onLoad(options) {
         console.log(options.searchWord);
+        this.setData({
+            searchWord:options.searchWord
+        })
     },
 
     /**

@@ -1,4 +1,5 @@
 // pages/vedio/vedio.js
+let timer = null
 
 import request from '../../utils/request'
 Page({
@@ -8,8 +9,11 @@ Page({
      */
     data: {
         placeholderContent: '',
+        // 搜索热榜
         hotList: [],
-        hotListDetail: []
+        hotListDetail: [],
+        //模糊匹配的数据
+        searchList:[]
     },
 
     /**
@@ -50,14 +54,48 @@ Page({
         })
         let hotDetail = {}
         hotDetail.title = res.playlist.name
-        hotDetail.list=res.playlist.tracks.slice(0,20)
+        hotDetail.list = res.playlist.tracks.slice(0, 20)
         let hotListDetailTemp = []
         hotListDetailTemp = this.data.hotListDetail
         hotListDetailTemp.push(hotDetail)
         this.setData({
-            hotListDetail:hotListDetailTemp
+            hotListDetail: hotListDetailTemp
         })
     },
+    //从搜索热榜题跳转到搜索详情页
+    handleSearchList(e) {
+        wx.navigateTo({
+            url: '/pages/searchDetail/searchDetail?searchWord=' + e.currentTarget.dataset.list.name
+        })
+    },
+    //当搜索框有文字时弹出模糊搜索
+    onChange(e) {
+        if (timer) {
+            clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+            this.getSuggestInfo(e.detail)
+        }, 1000)
+    },
+    //请求模糊数据
+    async getSuggestInfo(word) {
+        if(!word){
+            this.setData({
+                searchList:[]
+            })
+        }
+        let res = await request('/search/suggest',{keywords:word})
+        this.setData({
+            searchList:res.result.songs
+        })
+    },
+    //从模糊搜索跳转到搜索详情
+    handleSuggest(e) {
+        wx.navigateTo({
+            url: '/pages/searchDetail/searchDetail?searchWord=' + e.currentTarget.dataset.suggestlist.name
+        })
+    },
+
 
     /**
      * 生命周期函数--监听页面初次渲染完成

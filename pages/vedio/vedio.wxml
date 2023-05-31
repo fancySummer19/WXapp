@@ -1,7 +1,14 @@
 <view class="videoContainer">
     <!-- 搜索框 -->
     <view class="header">
-        <van-search value="{{ value }}" placeholder="请输入搜索关键词" show-action bind:search="onSearch" bind:cancel="onCancel" class="searchBar" />
+        <van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:search="onSearch" bind:cancel="onCancel" bind:change="onChange" class="searchBar" />
+    </view>
+    <!-- 模糊搜索 -->
+    <view class="showSeachContent" wx:if="{{searchList}}">
+        <view class="searchItem" wx:for="{{searchList}}" wx:key="index" data-suggestList="{{item}}" bindtap="handleSuggest">
+            <text class="iconfont icon-sousuo"></text>
+            <text class="content">{{item.name}}</text>
+        </view>
     </view>
     <!-- 热搜榜 -->
     <view class="hotContainer">
@@ -10,7 +17,7 @@
                 <view class="title">
                     <text class="titleContent">{{item.title}}</text>
                 </view>
-                <view class="musicItem" wx:for="{{item.list}}" wx:key="index" wx:for-item="musics">
+                <view class="musicItem" wx:for="{{item.list}}" wx:key="index" wx:for-item="musics" bindtap="handleSearchList" data-list="{{musics}}">
                     <text class="count">{{index+1}}.</text>
                     <text class="nusicName">{{musics.name}}</text>
                 </view>
