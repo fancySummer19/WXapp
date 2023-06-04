@@ -75,7 +75,7 @@ Page({
         }
         timer = setTimeout(() => {
             this.getSuggestInfo(e.detail)
-        }, 1000)
+        }, 200)
     },
     //请求模糊数据
     async getSuggestInfo(word) {

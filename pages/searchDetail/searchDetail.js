@@ -1,11 +1,23 @@
 // pages/searchDetail/searchDetail.js
+import request from '../../utils/request'
+import PubSub from 'pubsub-js'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        searchWord:''
+        searchWord: '',
+        searchListId: [],
+
+        recommendSongs: [],
+        day: '',
+        month: '',
+        // list:[],
+        listId: '',
+        listInfo: [],
+        index: 0,
+        test:''
     },
 
     /**
@@ -14,7 +26,118 @@ Page({
     onLoad(options) {
         console.log(options.searchWord);
         this.setData({
-            searchWord:options.searchWord
+            searchWord: options.searchWord
+        })
+        this.getSearchInfo()
+        //re
+        if (options.id) {
+            this.setData({
+                listId: options.id
+            })
+            //获取跳转过来时携带的歌单ID
+            this.getListDetails(options.id)
+            this.getLsitInfo(options.id)
+        } else {
+            // console.log(ListId);
+            //判断用户是否登录
+            let userInfo = wx.getStorageSync('userInfo')
+            if (!userInfo) {
+                wx.showToast({
+                    title: '请先登录',
+                    success: () => {
+                        wx.reLaunch({
+                            url: '/pages/login/login',
+                        })
+                    }
+                })
+            }
+            //更新日期
+            this.setData({
+                day: new Date().getDate(),
+                month: new Date().getMonth() + 1
+            })
+
+            //请求每日歌曲的数据
+            // this.getRecommendSongs(wx.getStorageSync('cookie'))
+            this.getSearchInfo()
+            // this.getListDetails(this.test)
+        }
+        //订阅来自songDetail的消息用于切换歌曲
+        PubSub.subscribe('switchType', (msg, type) => {
+            let {
+                recommendSongs,
+                index
+            } = this.data
+            if (type === 'pre') {
+                (index === 0) && (index = recommendSongs.length)
+                index -= 1
+            } else {
+                (index === recommendSongs.length - 1) && (index = -1)
+                index += 1
+            }
+            this.setData({
+                index
+            })
+            let musicId = recommendSongs[index].id
+            PubSub.publish('musicId', musicId)
+        })
+    },
+
+    //获取搜索数据
+    async getSearchInfo() {
+        let res = await request('/search', {
+            keywords: this.data.searchWord
+        })
+        let idList = []
+        res.result.songs.forEach(element => {
+            idList.push(element.album.id)
+        });
+        this.setData({
+            searchListId: idList,
+            test:res.result.songs[0].album.id
+        })
+    },
+    //获取歌单的信息
+    async getLsitInfo(listId) {
+        let res = await request('/playlist/detail', {
+            id: listId
+        })
+        this.setData({
+            listInfo: res.playlist
+        })
+    },
+    //获取歌单的所有歌曲
+    async getListDetails(listid) {
+        let res = await request('/playlist/track/all', {
+            id: listid,
+            limit: 20,
+            offset: 1
+        })
+        this.setData({
+            recommendSongs: res.songs
+        })
+    },
+    //跳转到歌曲详情页
+    toSongDetail(event) {
+        let {
+            song,
+            index
+        } = event.currentTarget.dataset
+        this.setData({
+            index
+        })
+        wx.navigateTo({
+            url: '/pages/songDetail/songDetail?musicId=' + song.id,
+        })
+    },
+
+    //获取每日推荐歌曲信息
+    async getRecommendSongs(cookie) {
+        let res = await request('/recommend/songs', {
+            cookie
+        })
+        this.setData({
+            recommendSongs: res.data.dailySongs
         })
     },
 
@@ -43,7 +166,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload() {
-
+        PubSub.unsubscribe('switchType')
     },
 
     /**

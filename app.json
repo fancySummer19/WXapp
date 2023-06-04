@@ -27,9 +27,9 @@
             },
             {
                 "pagePath": "pages/vedio/vedio",
-                "text": "视频",
-                "iconPath": "/static/images/tab/shipin-2.png",
-                "selectedIconPath": "/static/images/tab/shipin.png"
+                "text": "搜索",
+                "iconPath": "/static/images/tab/sousuo.png",
+                "selectedIconPath": "/static/images/tab/sousuo-2.png"
             },
             {
                 "pagePath": "pages/personal/personal",
