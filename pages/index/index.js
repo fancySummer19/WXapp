@@ -13,8 +13,10 @@ Page({
         //排行榜数据
         topList: [],
         //精品歌单数据
-        cats:['华语','古风','欧美','流行'],
-        highQualityLists:[]
+        cats: ['华语', '古风', '欧美', '流行'],
+        highQualityLists: [],
+        //每日歌单
+        recommendSongs: [],
     },
 
     /**
@@ -52,53 +54,69 @@ Page({
             topList: resultArr
         })
         //获取精品歌单
-        this.data.cats.forEach(e=>{
+        this.data.cats.forEach(e => {
             this.getHighQuality(e)
+        })
+        //请求每日推荐歌曲的第一首
+        if (wx.getStorageSync('cookie')) {
+            this.getRecommendSongs(wx.getStorageSync('cookie'))
+        }
+    },
+    //获取每日推荐歌曲信息
+    async getRecommendSongs(cookie) {
+        let res = await request('/recommend/songs', {
+            cookie
+        })
+        this.setData({
+            recommendSongs: res.data.dailySongs[0]
         })
     },
     //获取精品歌单
-    async getHighQuality(cat){
-        let res =await request('/top/playlist/highquality',{limit:20,cat})
-        let list = res.playlists.slice(0,3)
-        let list2 ={
+    async getHighQuality(cat) {
+        let res = await request('/top/playlist/highquality', {
+            limit: 20,
+            cat
+        })
+        let list = res.playlists.slice(0, 3)
+        let list2 = {
             list,
             cat
         }
         let lists = this.data.highQualityLists.concat(list2)
         this.setData({
-            highQualityLists:lists
+            highQualityLists: lists
         })
     },
     //处理轮播图的跳转
-    handleBanner(event){
+    handleBanner(event) {
         let banner = event.currentTarget.dataset.banner
-        if(banner.targetType==1) {
+        if (banner.targetType == 1) {
             wx.navigateTo({
                 url: '/pages/songDetail/songDetail?musicId=' + banner.song.id,
             })
         }
-        if(banner.targetType==10) {
+        if (banner.targetType == 10) {
             wx.navigateTo({
-                url: '/pages/recommendSong/recommendSong?id='+banner.targetId,
-              })
-        }else {
+                url: '/pages/recommendSong/recommendSong?id=' + banner.targetId,
+            })
+        } else {
             wx.showToast({
-              title: '不能跳转',
-              icon:'error'
+                title: '不能跳转',
+                icon: 'error'
             })
         }
     },
     //从推荐歌单跳转到歌单详情
-    hanleRecommendDetails(event){
+    hanleRecommendDetails(event) {
         let list = event.currentTarget.dataset.list
         wx.navigateTo({
-          url: '/pages/recommendSong/recommendSong?id='+list.id,
+            url: '/pages/recommendSong/recommendSong?id=' + list.id,
         })
     },
     //每日推荐的页面跳转
-    handleMeiri(){
+    handleMeiri() {
         wx.navigateTo({
-          url: '/pages/recommendSong/recommendSong',
+            url: '/pages/recommendSong/recommendSong',
         })
     },
 

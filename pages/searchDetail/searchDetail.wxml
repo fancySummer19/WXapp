@@ -1,36 +1,6 @@
-<!--pages/recommendSong/recommendSong.wxml-->
-<view class="recommendSongContainer">
-    <!-- 头部 -->
-    <view class="header">
-        <image wx:if="{{!listId}}" src="{{recommendSongs[0].al.picUrl}}" />
-        <image wx:if="{{listId}}" src="{{listInfo.coverImgUrl}}" />
-        <view class="shadowOne">
-            <view class="date" wx:if="{{!listId}}">
-                <text class="day">{{day}}</text>
-                <text class="month">/{{month}}</text>
-            </view>
-            <!-- <view class="listInfoContainer" wx:if="{{listId}}">
-                <text class="listName">{{listInfo.name}}</text>
-            </view> -->
-        </view>
-    </view>
-    <!-- 列表 -->
-    <view class="listContainer">
-        <view class="listHeader" wx:if="{{listId}}">
-            <!-- <text>播放全部</text>
-            <text class="changeMore">多选</text> -->
-            <text class="listName">{{listInfo.name}}</text>
-        </view>
-        <!-- 内容 -->
-        <scroll-view scroll-y class="listScroll" wx:for="{{recommendSongs}}" wx:key="id" bindtap="toSongDetail" data-index="{{index}}" data-song="{{item}}">
-            <view class="scrollItem">
-                <image src="{{item.al.picUrl}}" />
-                <view class="musicInfo">
-                    <text class="musicName">{{item.name}}</text>
-                    <text class="author">{{item.ar[0].name}}-{{item.al.name}}</text>
-                </view>
-                <text class="iconfont icon-gengduo-shuxiang"></text>
-            </view>
-        </scroll-view>
-    </view>
+<view>
+    搜索功能因为接口原因无法渲染完整的列表
+</view>
+<view>
+    关键词：{{searchWord}}
 </view>
